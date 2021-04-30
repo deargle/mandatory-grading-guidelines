@@ -1,0 +1,31 @@
+{
+  "name": "mandatory-grading-guidelines",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:deargle/mandatory-grading-guidelines.git",
+  "author": "Dave Eargle <dave@daveeargle.com>",
+  "license": "MIT",
+  "dependencies": {
+    "bootstrap": "4.5.3",
+    "bootstrap-vue": "^2.21.2",
+    "css-loader": "^5.2.4",
+    "goal-seek": "^0.1.4",
+    "jquery": "^3.6.0",
+    "popper.js": "1.16",
+    "sass": "^1.32.12",
+    "sass-loader": "^11.0.1",
+    "style-loader": "^2.0.0",
+    "vue": "2.6",
+    "webpack": "^5.36.2"
+  },
+  "scripts": {
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "start": "webpack serve --open",
+    "sass": "sass --watch src/ dist/"
+  },
+  "devDependencies": {
+    "webpack-cli": "^4.6.0",
+    "webpack-dev-server": "^3.11.2"
+  }
+}
