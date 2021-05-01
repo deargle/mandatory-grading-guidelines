@@ -29,11 +29,12 @@ let lookup_percent_to_letter_items = [
   { 'floor': 70,  'letter': 'C-' },
   { 'floor': 67,  'letter': 'D+' },
   { 'floor': 64,  'letter': 'D'  },
-  { 'floor': 61,  'letter': 'D-'  }
+  { 'floor': 61,  'letter': 'D-' },
   { 'floor': 0,   'letter': 'F'  }
 ]
 
 let lookup_letter_to_number_items = [
+  // https://www.colorado.edu/registrar/sites/default/files/attached-files/transcriptkey_paper.pdf#:~:text=A%20Superior%2FExcellent%204.0%2093,Anschutz%20Medical%20Campus%20or%20for
   // letter, number
   { 'letter': 'A',  'number': 4.0 },
   { 'letter': 'A-', 'number': 3.7 },
@@ -45,6 +46,7 @@ let lookup_letter_to_number_items = [
   { 'letter': 'C-', 'number': 1.7 },
   { 'letter': 'D+', 'number': 1.3 },
   { 'letter': 'D',  'number': 1.0 },
+  { 'letter': 'D-', 'number': 0.7 },
   { 'letter': 'F',  'number':   0 }
 ]
 
