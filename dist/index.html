@@ -27,7 +27,7 @@
       <p>
         <em>This site is for entertainment purposes only.</em>
       </p>
-      <div v-cloak  class="" id='app'>
+      <div v-cloak class="" id='app'>
         <div class="">
           <input v-model='show_tables' type='checkbox' id='show_tables'>
           <label for="show_tables">Show Grading Scales</label>
@@ -48,7 +48,7 @@
         </div>
         <textarea
           v-model="grades_input_raw"
-          placeholder="Paste grades on a 100 pt scale here, one per line"
+          placeholder="Paste grades on a 100 pt scale here, one per line. The input should end with a blank line!"
           rows="8" cols="40"
           ></textarea>
 
@@ -62,23 +62,29 @@
           <h2>Curve</h2>
           <input type="number" v-model.number="curve">
           <p>Curve: {{ curve }}</p>
-          <p>Curved GPA Average: {{ curved_letter_point_average }}</p>
 
-          <div class="row">
-            <div class="col">
-              <h3>Curved grade percents</h3>
-              <textarea
-              :value='grades_curved_raw_percent'
-              name="name" rows="8" cols="40"
-              ></textarea>
+
+          <div v-if="!!curve">
+
+            <p>Curved GPA Average: {{ curved_letter_point_average }}</p>
+
+            <div class="row">
+              <div class="col">
+                <h3>Curved grade percents</h3>
+                <textarea
+                :value='grades_curved_raw_percent'
+                name="name" rows="8" cols="40"
+                ></textarea>
+              </div>
+              <div class="col">
+                <h3>Curved grade letters</h3>
+                <textarea
+                :value='grades_curved_raw_letters'
+                name="name" rows="8" cols="40"
+                ></textarea>
+              </div>
             </div>
-            <div class="col">
-              <h3>Curved grade letters</h3>
-              <textarea
-              :value='grades_curved_raw_letters'
-              name="name" rows="8" cols="40"
-              ></textarea>
-            </div>
+
           </div>
 
         </div>
