@@ -16,19 +16,20 @@ import goalseek from 'goal-seek';
 
 import './style.scss';
 
-// using https://pages.collegeboard.org/how-to-convert-gpa-4.0-scale
+// https://oit.colorado.edu/services/teaching-learning-applications/canvas/help/instructor-support/grade-schemes
 let lookup_percent_to_letter_items = [
   // floor, letter
-  { 'floor': 93,  'letter': 'A'  },
+  { 'floor': 94,  'letter': 'A'  },
   { 'floor': 90,  'letter': 'A-' },
   { 'floor': 87,  'letter': 'B+' },
-  { 'floor': 83,  'letter': 'B'  },
+  { 'floor': 84,  'letter': 'B'  },
   { 'floor': 80,  'letter': 'B-' },
   { 'floor': 77,  'letter': 'C+' },
-  { 'floor': 73,  'letter': 'C'  },
+  { 'floor': 74,  'letter': 'C'  },
   { 'floor': 70,  'letter': 'C-' },
   { 'floor': 67,  'letter': 'D+' },
-  { 'floor': 65,  'letter': 'D'  },
+  { 'floor': 64,  'letter': 'D'  },
+  { 'floor': 61,  'letter': 'D-'  }
   { 'floor': 0,   'letter': 'F'  }
 ]
 
