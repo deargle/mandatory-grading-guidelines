@@ -9,6 +9,7 @@
     "bootstrap": "4.5.3",
     "bootstrap-vue": "^2.21.2",
     "css-loader": "^5.2.4",
+    "gh-pages": "^3.1.0",
     "goal-seek": "^0.1.4",
     "jquery": "^3.6.0",
     "popper.js": "1.16",
@@ -22,7 +23,8 @@
     "build": "webpack",
     "watch": "webpack --watch",
     "start": "webpack serve --open",
-    "sass": "sass --watch src/ dist/"
+    "sass": "sass --watch src/ dist/",
+    "deploy": "gh-pages -d dist"
   },
   "devDependencies": {
     "webpack-cli": "^4.6.0",
