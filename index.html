@@ -12,23 +12,44 @@
   </head>
   <body>
     <div class="container">
-
     <h1>Mandatory Grading Guidelines</h1>
+      <p>Some universities have suggested mandatory letter grade distribution guidelines.
+      This tool helps with compliance with those optional mandatory guidelines.</p>
+      <p>Example usage:
+        <ul>
+          <li>Download your grades as a spreadsheet</li>
+          <li>Copy the final grade (out of 100) into the textarea below</li>
+          <li>Observe the averaged gpa.</li>
+          <li>If desired, add a universal curve.</li>
+          <li>Copy curved scores out of the bottom textarea and paste back into your spreadsheet.</li>
+        </ul>
+      </p>
+      <p>
+        <em>This site is for entertainment purposes only.</em>
+      </p>
       <div v-cloak  class="" id='app'>
-        <div class="" v-show='!!show_tables'>
-          <b-table
+        <div class="">
+          <input v-model='show_tables' type='checkbox' id='show_tables'>
+          <label for="show_tables">Show Grading Scales</label>
+        </div>
+        <div class="row" v-show='!!show_tables'>
+          <div class="col">
+            <b-table
             small
             :items='lookup_letter_to_number_items'
             ></b-table>
-          <b-table
+          </div>
+          <div class="col">
+            <b-table
             small
             :items='lookup_percent_to_letter_items'
             ></b-table>
+          </div>
         </div>
         <textarea
           v-model="grades_input_raw"
           placeholder="Paste grades on a 100 pt scale here, one per line"
-          rows="8" cols="80"
+          rows="8" cols="40"
           ></textarea>
 
         <div v-if='grades_input'>
@@ -43,17 +64,22 @@
           <p>Curve: {{ curve }}</p>
           <p>Curved GPA Average: {{ curved_letter_point_average }}</p>
 
-          <h3>Curved grade percents</h3>
-          <textarea
-            :value='grades_curved_raw_percent'
-            name="name" rows="8" cols="80"
-            ></textarea>
-
-          <h3>Curved grade letters</h3>
-          <textarea
-            :value='grades_curved_raw_letters'
-            name="name" rows="8" cols="80"
-            ></textarea>
+          <div class="row">
+            <div class="col">
+              <h3>Curved grade percents</h3>
+              <textarea
+              :value='grades_curved_raw_percent'
+              name="name" rows="8" cols="40"
+              ></textarea>
+            </div>
+            <div class="col">
+              <h3>Curved grade letters</h3>
+              <textarea
+              :value='grades_curved_raw_letters'
+              name="name" rows="8" cols="40"
+              ></textarea>
+            </div>
+          </div>
 
         </div>
         <div v-else>
