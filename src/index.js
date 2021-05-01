@@ -12,8 +12,6 @@ Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 
 // other ----
-import goalseek from 'goal-seek';
-
 import './style.scss';
 
 // https://oit.colorado.edu/services/teaching-learning-applications/canvas/help/instructor-support/grade-schemes
