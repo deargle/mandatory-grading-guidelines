@@ -15,7 +15,8 @@ Vue.use(IconsPlugin)
 import './style.scss';
 
 // https://oit.colorado.edu/services/teaching-learning-applications/canvas/help/instructor-support/grade-schemes
-let lookup_percent_to_letter_items = [
+
+let lookup_percent_to_letter_items_floor_94 = [
   // floor, letter
   { 'floor': 94,  'letter': 'A'  },
   { 'floor': 90,  'letter': 'A-' },
@@ -30,6 +31,27 @@ let lookup_percent_to_letter_items = [
   { 'floor': 61,  'letter': 'D-' },
   { 'floor': 0,   'letter': 'F'  }
 ]
+
+let lookup_percent_to_letter_items_floor_93 = [
+  // floor, letter
+  { 'floor': 93,  'letter': 'A'  },
+  { 'floor': 90,  'letter': 'A-' },
+  { 'floor': 87,  'letter': 'B+' },
+  { 'floor': 83,  'letter': 'B'  },
+  { 'floor': 80,  'letter': 'B-' },
+  { 'floor': 77,  'letter': 'C+' },
+  { 'floor': 73,  'letter': 'C'  },
+  { 'floor': 70,  'letter': 'C-' },
+  { 'floor': 67,  'letter': 'D+' },
+  { 'floor': 63,  'letter': 'D'  },
+  { 'floor': 60,  'letter': 'D-' },
+  { 'floor': 0,   'letter': 'F'  }
+]
+
+let lookup_percent_to_letter_items_map = {
+  'floor_93': lookup_percent_to_letter_items_floor_93,
+  'floor_94': lookup_percent_to_letter_items_floor_94,
+}
 
 let lookup_letter_to_number_items = [
   // https://www.colorado.edu/registrar/sites/default/files/attached-files/transcriptkey_paper.pdf#:~:text=A%20Superior%2FExcellent%204.0%2093,Anschutz%20Medical%20Campus%20or%20for
@@ -52,7 +74,8 @@ var app = new Vue({
   el: '#app',
   data: {
     lookup_letter_to_number_items:   lookup_letter_to_number_items,
-    lookup_percent_to_letter_items:  lookup_percent_to_letter_items,
+    lookup_percent_to_letter_items_map:  lookup_percent_to_letter_items_map,
+    which_lookup_percent_to_letter_items: 'floor_94',
     grades_input_raw: '',
     show_tables: false,
     curve: 0,
@@ -84,23 +107,23 @@ var app = new Vue({
           'curve': this.curve,
           'curved_grade_percent': curved_grade_percent
         }
-        let table_entry_index = lookup_percent_to_letter_items.findIndex(
+        let table_entry_index = this.lookup_percent_to_letter_items.findIndex(
           (table_entry) => {
             return grade_percent >= table_entry['floor']
           }
         )
-        let grade_letter = lookup_percent_to_letter_items[table_entry_index]['letter']
+        let grade_letter = this.lookup_percent_to_letter_items[table_entry_index]['letter']
         _obj['grade_letter'] = grade_letter
 
         _obj['letter_points'] = lookup_letter_to_number_items.find(element => element['letter'] == grade_letter)['number']
 
         // curved
-        let curved_table_entry_index = lookup_percent_to_letter_items.findIndex(
+        let curved_table_entry_index = this.lookup_percent_to_letter_items.findIndex(
           (table_entry) => {
             return curved_grade_percent >= table_entry['floor']
           }
         )
-        let curved_grade_letter = lookup_percent_to_letter_items[curved_table_entry_index]['letter']
+        let curved_grade_letter = this.lookup_percent_to_letter_items[curved_table_entry_index]['letter']
         _obj['curved_grade_letter'] = curved_grade_letter
 
         _obj['curved_letter_points'] = lookup_letter_to_number_items.find(element => element['letter'] == curved_grade_letter)['number']
@@ -126,6 +149,9 @@ var app = new Vue({
     },
     grades_curved_raw_letters: function() {
       return this.grades_map.map(el => el['curved_grade_letter']).join("\n")
+    },
+    lookup_percent_to_letter_items: function() {
+      return this.lookup_percent_to_letter_items_map[this.which_lookup_percent_to_letter_items]
     }
   }
 });
