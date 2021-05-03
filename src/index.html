@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <title>Class GPA Calculator</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Class GPA Calculator</h1>
+      <p class='meta'>5/3/2021 by <a href="https://daveeargle.com">Dave Eargle</a></p>
+      <p>Some schools have guidelines for distribution of letter grades for a class. This tool helps with compliance with those guidelines.</p>
+      <p>Example usage:
+        <ul>
+          <li>Download your grades as a spreadsheet</li>
+          <li>Choose whether to use a grading scheme with a floor of 94 or 93 for an A, etc.</li>
+          <li>Copy the final grade (out of 100) into the textarea below</li>
+          <li>Observe the averaged gpa.</li>
+          <li>If desired, add a universal curve.</li>
+          <li>Copy curved scores out of the bottom textarea and paste back into your spreadsheet.</li>
+        </ul>
+      </p>
+      <p>
+        <div class="alert alert-info">
+          <strong>Heads up!</strong> Consult your school's policies carefully about whether
+          the GPAs should be averaged <em>within</em> sections, or <em>across</em> sections, or otherwise.
+        </div>
+        <em>This site is for entertainment purposes only.</em>
+      </p>
+      <div v-cloak class="" id='app'>
+
+        <div>
+          <b-form-group label="Select Grading Scheme" v-slot="{ ariaDescribedby }">
+            <b-form-radio v-model="which_lookup_percent_to_letter_items" :aria-describedby="ariaDescribedby" value="floor_94">94 Floor</b-form-radio>
+            <b-form-radio v-model="which_lookup_percent_to_letter_items" :aria-describedby="ariaDescribedby" value="floor_93">93 Floor</b-form-radio>
+          </b-form-group>
+        </div>
+
+        <div class="">
+          <input v-model='show_tables' type='checkbox' id='show_tables'>
+          <label for="show_tables">Show Grading Scales</label>
+        </div>
+        <div class="row" v-show='!!show_tables'>
+          <div class="col">
+            <b-table
+            small
+            :items='lookup_letter_to_number_items'
+            ></b-table>
+          </div>
+          <div class="col">
+            <b-table
+            small
+            :items='lookup_percent_to_letter_items'
+            ></b-table>
+          </div>
+        </div>
+        <textarea
+          v-model="grades_input_raw"
+          placeholder="Paste grades on a 100 pt scale here, one per line. The input should end with a blank line!"
+          rows="8" cols="40"
+          ></textarea>
+
+        <div v-if='grades_input'>
+          <b-table
+            :items='grades_map'
+            :fields='grades_map_fields'
+            ></b-table>
+          <p>GPA Average: {{ letter_point_average }}</p>
+
+          <h2>Curve</h2>
+          <input type="number" v-model.number="curve">
+          <p>Curve: {{ curve }}</p>
+
+
+          <div v-if="!!curve">
+
+            <p>Curved GPA Average: {{ curved_letter_point_average }}</p>
+
+            <div class="row">
+              <div class="col">
+                <h3>Curved grade percents</h3>
+                <textarea
+                :value='grades_curved_raw_percent'
+                name="name" rows="8" cols="40"
+                ></textarea>
+              </div>
+              <div class="col">
+                <h3>Curved grade letters</h3>
+                <textarea
+                :value='grades_curved_raw_letters'
+                name="name" rows="8" cols="40"
+                ></textarea>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+        <div v-else>
+          No input found
+        </div>
+
+      </div>
+    </div>
+  </body>
+</html>
