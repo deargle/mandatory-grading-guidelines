@@ -80,6 +80,7 @@ var app = new Vue({
     grades_input_raw: '',
     show_tables: false,
     curve: 0,
+    loading: false
   },
   computed: {
     grades_map_fields: function(){
@@ -153,6 +154,15 @@ var app = new Vue({
     },
     lookup_percent_to_letter_items: function() {
       return this.lookup_percent_to_letter_items_map[this.which_lookup_percent_to_letter_items]
+    },
+    ratio_a: function() {
+
+    },
+    ratio_a_a_minus: function() {
+
     }
+  },
+  created: function(){
+    document.getElementById('loading').remove()
   }
 });
